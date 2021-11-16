@@ -1,0 +1,62 @@
+%!TEX root = ../sample.tex
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+This article has presented Bayesian estimators for count data observed by unreliable sensors. Our work was motivated by the application of counting people from an autonomous mobile robot using noisy sensors and perception algorithms. The work extends our prior work~\cite{jovan18a} with two main contributions.
+% 
+First, we presented variations of our previous POPP formulation: POPP-Beta extends POPP by accounting for the unreliability of the observation model; C-POPP extends POPP  by modelling the case when sensors are uncorrelated; and POPP-Dirichlet combines POPP-Beta and C-POPP to provide the benefits of each correction. Evaluations on synthetic data and observations taken by a robot show that each extension provides progressively more accurate estimates than the POPP filter.  
+% 
+Second, posteriors from FOPP, POPP and POPP-Beta were used to drive exploration by a mobile robot for a series of three exploration experiments. An upper bound interval exploration method in combination with Fourier transformation was used to solve the exploration-exploitation problem. This resulted in a labelled data set of of human presence counts. Our initial evaluation demonstrated that POPP and POPP-Beta were able to drive the robot to observe more people over time than the FOPP-based method. 
+
+There are many directions for further work including utilizing C-POPP and POPP-Dirichlet to drive the robot observation in an extended time period, allowing another filter strategies for faster and more accurate posterior estimates, and removing convenient closed forms of conjugate priors in the sensor models.
+        
+        % Finally, the various POPP filters are compared to one another and to a FOPP estimator on this data set.
+
+% which capture the regular structures of dynamic behaviours, especially humans,    
+% 
+% 
+% Hence, any learning algorithm requires practical estimation which capture temporal structures of human activities.   
+% 
+% The adaptation requires practical estimation which capture the structure 
+% 
+% The robot will be able to demonstrate that it can recognise activities at various
+% temporal scales, and infer or predict future activities based on its temporal model (e.g. it
+% might go to the lounge because it has just seen the residents finishing their lunch). It
+% will also be able to detect anomalies as sequences of very low likelihood data.
+% 
+% The robot only observes a limited portion of the space at any time, and so must actively plan to go to places to observe events.
+% 
+% learns dynamic behaviours of its surrounding while patroling around perimeters of a large area. 
+% 
+% Human activities follow predictable, repeating patterns that generate corresponding
+% changes in space.
+% 
+% Our
+% work will allow a robot to create a map of a building and its contents: not just walls but people,
+% furniture and objects, all in a unified spatial-temporal representation that will allow a robot to
+% respond robustly to the dynamics of its environment. In order to reason about the structure
+% and purpose of these dynamics we will employ the spatial-temporal representations in support of
+% activity recognition. This will allow the robot to detect, and exploit, patterns of human behaviour.
+% 
+% In our care scenario we will explore how a robot can support staff working with a small group of
+% elderly patients in a nursing facility. The robot will learn about the patients’ regular activities. It
+% will use this knowledge to perform support tasks for the care staff and serve as an early warning
+% system when patients vary from regular behaviour (e.g. wandering the corridors at night, falling
+% over). In our security scenario we will explore how a robot can act as a security guard, performing
+% patrols to learn the typical spatial-temporal structures in a building and notifying a human guard
+% of suspicious variations from these.
+
+% \section{Limitations and Further Work}
+% 
+% Two basic statistical models: Spectral-FOPP and POPP  have been proposed and evaluated. The combination of these two is able to extract temporal dynamics in the aggregate level of human activities from unreliable sensors, along with the ability to exploit this understanding for better exploration by an autonomous mobile robot. However, the spectral-POPP model could still be improved in the following two ways:
+% \begin{enumerate}
+%     \item In Chapter \ref{chap:popp_independent}, The Gamma filter approximates a sum of Gamma distributions with a single Gamma distribution assuming that the sensor performs rather reliable. Instead of using a single Gamma distribution to approximate a sum of $m$ Gamma distributions, $n$ gamma distributions, where $n$ is much smaller than $m$, could be used to improve the accuracy of the approximation to the posterior. This would promise to be more accurate than a single gamma, but more efficient than a histogram filter. Thus, it might be faster than the switching filter.
+% 
+%     \item The spectral-Poisson model (Spectral-FOPP) in Chapter \ref{chap:spectral_poisson} is a statistical model which is able, and only able, to capture the periodic structure of count data. It indirectly assumes that there is an underlying pattern governing the evolution of the parameter $\lambda$ of a Poisson process. The spectral-Poisson might not be able to capture other non-periodic structures governing the parameter $\lambda$, such as trends. 
+% 
+%         A Gaussian process modulated Poisson process might provide a better model for different structures which govern $\lambda$ overtime. Work from \cite{lloyd2015variational} presents a fully variational Bayesian inference scheme for continuous Gaussian-process modulated Poisson process. It provides a good estimators and is fast in estimating $\lambda$ of a Poisson process. An extension to this statistical model which embeds both trends and periodicity in the model might provide a solution to the limitations of Spectral-Poisson while being fully Bayesian. 
+% \end{enumerate}
+
+% Listing all limitations which have been mentioned in previous sections.
+% Listing all further work which can extend this thesis.
