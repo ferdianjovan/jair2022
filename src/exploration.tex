@@ -1,14 +1,14 @@
-%!TEX root = ../sample.tex
+%!TEX root = ../bare_jrnl.tex
 
 \section{Exploring for Human Activities}
 \label{sec:exploration}
 
-So far, the paper has focused on Bayesian methods for inferring a belief state about the spatio-temporal patterns of human occupancy from unreliable sensors. Given such a belief state a robot may plan how to actively explore to acquire new information so as to complete a task~\cite{hanheide2017robot,sridharan2019reba}. Here, the robot uses predicted counts from the belief state to \emph{explore} so as to detect human activities with increasing efficiency. 
+So far, the paper has focused on Bayesian methods for inferring a belief state about the spatio-temporal patterns of human occupancy from unreliable sensors. Given such a belief state a robot may plan how to actively explore to acquire new information so as to complete a task~\cite{hanheide2017robot, sridharan2019reba}. Here, the robot uses predicted counts from the belief state to \emph{explore} so as to detect human activities with increasing efficiency. 
 
 Specifically, the robot's choice is whether to explore new region-time combinations or to exploit region-time combinations that are known to yield a high number of activities. This an instance of an \emph{exploration-exploitation} problem. Exploration-exploitation problems arise whenever an agent lacks an adequate model of the process it must control. At each moment, the agent chooses either to explore so as to improve the model or to exploit the existing model so as to maximise immediate performance. 
 % In each time the robot has a choice between many actions, each of which both explores and exploits a certain place, but to varying degrees. As its goal is to maximise the reward gathered–as in getting as much data on human activities (by seeing as many humans) as possible–given its limited operational life, it is preferable to have a policy that is as near optimal as possible.
 
-While exploration-exploitation problems in reinforcement learning, are typically intractable, there are well known, fast to compute, approximations~\cite{wyatt1998exploration,1413255,AUDIBERT20091876}. One such approach is to use the upper bound of a probability distribution over the quantity being maximised. This causes the decision-making agent to exploit high-scoring, certain estimates, and explore highly uncertain estimates. In our robot exploration, for example, when the robot visits a place, it can be because the place either actually has high number of people (\textit{exploitation}) or potentially has high number of people (\textit{exploration}). In our case we use an upper bound on the arrival rate ($\lambda$) of a Poisson process ($\lambda_{UB}$) to choose the region for the robot to visit next. The upper bound of the probability interval of the arrival rate of a Poisson process is calculated as follows:
+While exploration-exploitation problems in reinforcement learning, are typically intractable, there are well known, fast to compute, approximations~\cite{wyatt1998exploration, 1413255, AUDIBERT20091876}. One such approach is to use the upper bound of a probability distribution over the quantity being maximised. This causes the decision-making agent to exploit high-scoring, certain estimates, and explore highly uncertain estimates. In our robot exploration, for example, when the robot visits a place, it can be because the place either actually has high number of people (\textit{exploitation}) or potentially has high number of people (\textit{exploration}). In our case we use an upper bound on the arrival rate ($\lambda$) of a Poisson process ($\lambda_{UB}$) to choose the region for the robot to visit next. The upper bound of the probability interval of the arrival rate of a Poisson process is calculated as follows:
 
 \begin{equation}
 	\label{eq:upper_bound_exploration}
@@ -27,13 +27,13 @@ While exploration-exploitation problems in reinforcement learning, are typically
 
 \begin{figure}[t!]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./figures/map_vs_ub.png}
+	\includegraphics[width=0.5\textwidth]{./figures/map_vs_ub.png}
 	\caption{A spectral Poisson process of region 9 (see Figure \ref{fig:map_popp_independent_test}) represented by its MAP hypothesis (blue line) and its upper bound of the probability interval (red line).}
 	\label{fig:map_vs_ub}
-	\vspace{-25pt}
 \end{figure}
 
-To tie the estimate of a particular Poisson process over a time interval to data collected previously, as in Section~\ref{sec:evareal} we assume that human presence in each region follows a \emph{periodic} Poisson process with daily periodicity. This allows us to regularise, and fill missing data, across the point estimates of upper bounds using methods based on the Fourier transform.  This exploits assumptions and algorithms introduced in our prior work. In particular, the series of upper bounds $\lambda_{UB}(t_i, t_j)$ are encoded and extracted via spectral analysis with the $l$-AAM technique described in~\cite{jovan_iros16}. The plot in Fig.~\ref{fig:map_vs_ub} shows how a spectral Poisson process look like, i.e., the effects of the spectral processing on a periodic Poisson process. Algorithm 2 depicts the process of computing the upper bound of a Poisson process and applying spectral analysis to it. We use this approach with upper bounds produced by our previously presented estimators: FOPP, POPP, and POPP-Beta. C-POPP and POPP-Dirichlet estimators are excluded in our experiments due to time limitation since C-POPP requires a lot data to construct relatively correct joint sensor models which translates to requiring longer period of experiments. Although POPP-Dirichlet does not require a lot of data to construct relatively correct joint sensor model due to the introduction of prior distribution of the sensor model, a certain amount of training data is required to create unbiased joint sensor models. 
+
+To tie the estimate of a particular Poisson process over a time interval to data collected previously, as in Section~\ref{sec:evareal} we assume that human presence in each region follows a \emph{periodic} Poisson process with daily periodicity. This allows us to regularise, and fill missing data, across the point estimates of upper bounds using methods based on the Fourier transform.  This exploits assumptions and algorithms introduced in our prior work. In particular, the series of upper bounds $\lambda_{UB}(t_i, t_j)$ are encoded and extracted via spectral analysis with the $l$-AAM technique described in~\cite{jovan_iros16}. The plot in Fig.~\ref{fig:map_vs_ub} shows how a spectral Poisson process look like, i.e., the effects of the spectral processing on a periodic Poisson process. Algorithm 2 depicts the process of computing the upper bound of a Poisson process and applying spectral analysis to it. We use this approach with upper bounds produced by our previously presented estimators: FOPP, POPP, and POPP-Beta. C-POPP and POPP-Dirichlet estimators are excluded in our experiments due to a need to limit experimental time to ~45 days to keep building use conditions that were broadly the same.\footnote{The experiments were conducted during a single academic semester within a university building.}
 
 \begin{figure}[t!]
 	\begin{center}
@@ -64,8 +64,8 @@ To tie the estimate of a particular Poisson process over a time interval to data
 			\hline
 		\end{tabular*}	
 	\end{center}
-	\vspace{-10pt}
 \end{figure}
+
 \begin{figure}[t!]
 	\begin{center}
 		\begin{tabular*}{0.5\textwidth}{l @{\extracolsep{\fill}}}
@@ -92,8 +92,8 @@ To tie the estimate of a particular Poisson process over a time interval to data
 			\hline
 		\end{tabular*}	
 	\end{center}
-	\vspace{-10pt}
 \end{figure} 
+
 
 \subsection*{Exploration Evaluation}
 
@@ -112,11 +112,10 @@ We can compare the different exploration policies on the observations the robot 
 
 \begin{figure}[t!]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./figures/exploration_percentage_region.png}
+	\includegraphics[width=0.5\textwidth]{./figures/exploration_percentage_region.png}
 	\caption{This graph shows the percentage of time that the robot observed activities when it was present in a region. It is a measure of how successful the robot's visit policy (choice of visit time and visit location) was in finding people. It presents results for for the FOPP, POPP and POPP-algorithms. %The activity exploration percentage across areas of the environment using three different exploration models (FOPP, POPP, POPP-Beta). The percentage shows the portion of time that the robot was observing activities.
 	}
 	\label{fig:exploration_percentage_region}
-	\vspace{-15pt}
 \end{figure}
 
 %\begin{figure}[t!]
@@ -135,10 +134,9 @@ We can compare the different exploration policies on the observations the robot 
 
 \begin{figure}[t!]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./figures/exploration_number_people_across_days_normalised.png}
+	\includegraphics[width=0.5\textwidth]{./figures/exploration_number_people_across_days_normalised.png}
 	\caption{The improvement ratio of activity observations during each phase of the trial. The dash line indicates a baseline performance, i.e., no improvement in exploration over time.}
 	\label{fig:exploration_improvement_ratio}
-	\vspace{-25pt}
 \end{figure}
 
 Figure \ref{fig:exploration_percentage_region} shows the percentage of visits to each region which yielded a non-zero true count. As can be seen, the exploration policy produced by POPP-Beta has the highest proportion of such visits in many of the regions, followed by the exploration policy according to the POPP model. Recall that some regions, such as 4, 5, 6, and 7, are not densely populated with humans across time compared to other regions (such as 1, 2, 3, and 10). The POPP and POPP-Beta models, however, still managed to improve the percentage of positive observations. This shows that the models correctly predicted that people would be present in particular locations at particular times. One should note that region 6 contains vending machines which are often detected as a person by the upper body detector. This leads to the FOPP model planning to visit this particular location when no activity is taking place. The POPP and the POPP-Beta models were able to correct the miscounts occurring in region 6, providing a better estimate of the posterior over the arrival rate $\lambda$. This leads to models that better capture the true underlying process and thus support more accurate exploration-exploitation trade-offs.
