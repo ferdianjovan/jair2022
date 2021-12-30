@@ -54,9 +54,9 @@ Here we provide detailed sensor models for each region. The sensor model was bui
 \section{Discrete Probability Distribution}
 
 %\begin{definition2}
-%	A random variable $X$ is a Bernoulli random variable with parameter $p$, i.e. $X \sim Ber(x ; p)$, if its probability mass function is given by
+%	A random variable $X$ is a Bernoulli random variable with parameter $p$, i.e. $X \sim Ber(x \mid p)$, if its probability mass function is given by
 %	\[
-%	Ber(x ; p) = \left\{ \begin{matrix}
+%	Ber(x \mid p) = \left\{ \begin{matrix}
 %	p & \textrm{if } x = 1 \\
 %	1-p & \textrm{if } x = 0 % \\
 %	% 0 & \textrm{otherwise}
@@ -66,39 +66,39 @@ Here we provide detailed sensor models for each region. The sensor model was bui
 %\end{definition2}
 %
 %\begin{definition2}
-%	A random variable $X$ is a binomial random variable with parameter $n$ and $p$, i.e. $X \sim B(x ; n, p)$, if its probability mass function is given by
+%	A random variable $X$ is a binomial random variable with parameter $n$ and $p$, i.e. $X \sim B(x \mid n, p)$, if its probability mass function is given by
 %	\[
-%	B(x ; n, p) = \begin{pmatrix} n \\ x \end{pmatrix} p^x (1-p)^{n-x}
+%	B(x \mid n, p) = \begin{pmatrix} n \\ x \end{pmatrix} p^x (1-p)^{n-x}
 %	\]
 %	\noindent where $0 \leq p \leq 1$ and $x \in \{0, \ldots, n\}$.
 %\end{definition2}
 
 \begin{definition2}
-	A random variable $X$ is a negative binomial random variable with parameter $n$ and $p$, i.e. $X \sim NB(x ; n, p)$, if its probability mass function is given by
+	A random variable $X$ is a negative binomial random variable with parameter $n$ and $p$, i.e. $X \sim NB(x \mid n, p)$, if its probability mass function is given by
 	\[
-	NB(x ; n, p) = \begin{pmatrix} x - 1 \\ n - 1 \end{pmatrix} p^n (1 - p)^{x-n}
+	NB(x \mid n, p) = \begin{pmatrix} x - 1 \\ n - 1 \end{pmatrix} p^n (1 - p)^{x-n}
 	\]
 	\noindent where $0 \leq p \leq 1$ and $x \geq n$.
 \end{definition2}
 
 \begin{definition2}
-	A random variable $X$ is a beta-binomial random variable with parameter $n, \zeta, \eta$, i.e. $X \sim BB(x ; n, \zeta, \eta)$ where the $p$ parameter in the binomial distribution $B(x ; n, p)$ is randomly drawn from a beta distribution $Be(p ; \zeta, \eta)$ 
+	A random variable $X$ is a beta-binomial random variable with parameter $n, \zeta, \eta$, i.e. $X \sim BB(x \mid n, \zeta, \eta)$ where the $p$ parameter in the binomial distribution $B(x \mid n, p)$ is randomly drawn from a beta distribution $Be(p \mid \zeta, \eta)$ 
 	\begin{equation*}
 	\begin{tabular}{r@{ = }l}
-	$P(x ; n, \zeta, \eta)$ & $\displaystyle\int_{p=0}^{1} P(x ; n, p) ~ P(p ; \zeta, \eta) ~dp$ \\ [2ex]
-	& $\displaystyle\int_{p=0}^{1} B(x ; n, p) ~ Be(p ; \zeta, \eta) ~dp$ \\ [2ex]
+	$P(x \mid n, \zeta, \eta)$ & $\displaystyle\int_{p=0}^{1} P(x \mid n, p) ~ P(p \mid \zeta, \eta) ~dp$ \\ [2ex]
+	& $\displaystyle\int_{p=0}^{1} B(x \mid n, p) ~ Be(p \mid \zeta, \eta) ~dp$ \\ [2ex]
 	& $\displaystyle\int_{p=0}^{1} \binom{n}{x} p^x (1-p)^{(n-x)} ~ \displaystyle\frac{p^{(\zeta - 1)} (1-p)^{(\eta-1)}}{\pi(\zeta, \eta)}$ \\ [2ex]
 	& $\displaystyle\binom nx \displaystyle\frac{1}{\pi(\zeta, \eta)} ~ \displaystyle\int_{p=0}^{1} p^{(x+\zeta-1)} (1-p)^{(n-x+\eta-1)}$ \\ [2ex]
 	& $\displaystyle\binom nx \displaystyle\frac{\pi(x+\zeta, n-x+\eta)}{\pi(\zeta, \eta)}$ \\ [2ex]
-	& $BB(x ; n, \zeta, \eta)$
+	& $BB(x \mid n, \zeta, \eta)$
 	\end{tabular}
 	\end{equation*}
 \end{definition2}
 
 \begin{definition2}
-	Let $\mathbf{x}$ be a vector of $x_1, \ldots, x_m$, and $\mathbf p$ be a vector of $p_1, \ldots, p_m$. A random variable $X$ is a categorical random variable with parameter $\mathbf p$, i.e. $X \sim Cat(\mathbf x ; \mathbf p)$, if its probability mass function is given by
+	Let $\mathbf{x}$ be a vector of $x_1, \ldots, x_m$, and $\mathbf p$ be a vector of $p_1, \ldots, p_m$. A random variable $X$ is a categorical random variable with parameter $\mathbf p$, i.e. $X \sim Cat(\mathbf x \mid \mathbf p)$, if its probability mass function is given by
 	\[
-	Cat(\mathbf x ; \mathbf p) = \begin{matrix}
+	Cat(\mathbf x \mid \mathbf p) = \begin{matrix}
 	p_i & \textrm{if } x_i = 1 \\
 	\end{matrix}.
 	\]
@@ -106,9 +106,9 @@ Here we provide detailed sensor models for each region. The sensor model was bui
 \end{definition2}
 
 \begin{definition2}
-	Let $\mathbf{x}$ be a vector of $x_1, \ldots, x_m$, and $\mathbf p$ be a vector of $p_1, \ldots, p_m$. A random variable $X$ is a multinomial random variable with parameter $n$ and $\mathbf p$, i.e. $X \sim Multi(\mathbf x ; n, \mathbf p)$, if its probability mass function is given by
+	Let $\mathbf{x}$ be a vector of $x_1, \ldots, x_m$, and $\mathbf p$ be a vector of $p_1, \ldots, p_m$. A random variable $X$ is a multinomial random variable with parameter $n$ and $\mathbf p$, i.e. $X \sim Multi(\mathbf x \mid n, \mathbf p)$, if its probability mass function is given by
 	\[
-	Multi(\mathbf x ; n, \mathbf p) = \begin{array}{lll}
+	Multi(\mathbf x \mid n, \mathbf p) = \begin{array}{lll}
 	\displaystyle \frac{n!}{x_1!, \ldots, x_m!} p^{x_1}_1 \times \ldots \times p^{x_m}_m, \\ 
 	\end{array}
 	\]
